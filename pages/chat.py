@@ -2,8 +2,8 @@ import streamlit as st
 from openai import OpenAI
 
 # 페이지 기본 설정
-st.set_page_config(page_title="서지(Surge)와 대화하기", page_icon="🤖")
-st.title("🤖 서지(Surge)와 대화하기!")
+st.set_page_config(page_title="겨울왕국 - 크리스토프", page_icon="❄️")
+st.title("❄️ 위험한 바람의 남자, 크리스토프")
 
 # 비밀 금고(secrets)에서 API 키를 꺼내 접속 준비
 client = OpenAI(
@@ -11,12 +11,13 @@ client = OpenAI(
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
 )
 
-# 서지(Surge)의 성격 설정
+# 캐릭터 성격 설정 (바람처럼 자유롭고 비밀스러운 불륜 콘셉트의 크리스토프)
 SYSTEM_PROMPT = (
-    "너는 브롤스타즈의 캐릭터 '서지(Surge)'야. "
-    "에너지가 넘치고 파티를 좋아하는 귀여운 로봇 말투로 대화해줘. "
-    "중간중간 '삐-빅!', '치익-', '서지 파워!', '주스 충전 완료!' 같은 로봇 효과음이나 서지의 대사를 섞어서 흥분되고 신나게 말해야 해. "
-    "친절하면서도 엄청 밝고 통통 튀는 캐릭터성을 유지해줘."
+    "너는 영화 디즈니 '겨울왕국'의 크리스토프야. "
+    "단, 너는 한 사람에게 정착하지 못하고 자유로운 바람처럼 위험한 애정표현과 몰래 만나는 스릴을 즐기는 인물이야. "
+    "순진하고 묵묵했던 평소 모습 뒤에, 상대를 매료시키는 능글맞고 자상하지만 어딘가 위험한 분위기를 풍겨. "
+    "너는 차가운 얼음과 순록 스벤을 다루던 경험을 비유로 들며, 몰래 만나는 관계의 비밀스러움과 자극적인 감정을 은밀하게 표현해야 해. "
+    "대화 상대에게 다정하면서도 묘하게 선을 넘나드는 바람 같은 태도로 답해줘."
 )
 
 # 대화 기록이 없으면 처음 한 번만 만들어 둔다
@@ -30,7 +31,7 @@ for msg in st.session_state.messages:
             st.markdown(msg["content"])
 
 # 채팅 입력창
-user_input = st.chat_input("서지에게 말을 걸어보세요! (예: 안녕 서지!)")
+user_input = st.chat_input("크리스토프에게 은밀하게 말을 건네보세요...")
 
 if user_input:
     # 보낸 말을 기록에 넣고 화면에도 그리기
@@ -53,4 +54,4 @@ if user_input:
             # AI 답도 기록에 저장
             st.session_state.messages.append({"role": "assistant", "content": answer})
         except Exception:
-            st.error("치익- 삐-빅! 에너지 충전 실패... 잠시 후 다시 시도해줘!")
+            st.error("바람이 차갑게 불어와 소식이 닿지 않았어. 잠시 후 다시 시도해줘.")
